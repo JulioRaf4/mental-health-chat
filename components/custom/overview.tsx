@@ -27,10 +27,8 @@ export const Overview = () => {
         >
           open source
         </Link>{' '}
-        tool designed to assist psychologists and patients in the field of mental health. Built with Next.js and Vercel's AI SDK, this chatbot template leverages the{' '}
-        <code className="rounded-md bg-muted px-1 py-0.5">streamText</code>{' '}
-        function on the server and the{' '}
-        <code className="rounded-md bg-muted px-1 py-0.5">useChat</code> hook on the client to enable a seamless and supportive interaction experience for therapy and mental well-being applications.
+        tool designed to assist psychologists and patients in the field of mental health. Built with Next.js and Vercel's AI SDK.{' '}
+        and has been trained with psychology-focused content to provide tailored support for therapy and mental well-being applications.
       </p>
       </div>
     </motion.div>
