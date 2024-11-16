@@ -1,6 +1,10 @@
 # Mental Health Chatbot
 
-A tool designed to assist psychologists and patients in the field of mental health. Built with Next.js and Vercel's AI SDK, this chatbot template leverages the `streamText` function on the server and the `useChat` hook on the client to enable a seamless and supportive interaction experience for therapy and mental well-being applications.
+A tool designed to assist psychologists and patients in the field of mental health. Built with Next.js and Vercel's AI SDK, this chatbot template leverages the `streamText` function on the server and the `useChat` hook on the client to enable a seamless and supportive interaction experience for therapy and mental well-being applications.It uses RAG (Retrieval-Augmented Generation) to retrieve studies, documents, articles and conversations within the context of psychology.
+
+Chat created to help people and professionals in the field of mental health and psychology.
+
+> Created for the RAG for Psychology Applications article
 
 <picture align="center">
   <img align="center" alt="Briefer usage diagram" src="https://www.ucheck.co.uk/wp-content/uploads/mental-health-2313426_1280.png">
@@ -9,7 +13,7 @@ A tool designed to assist psychologists and patients in the field of mental heal
 
 ## Running Locally
 
-You will need to use the environment variables [defined in `.env.example`](.env.example) to run this project. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables) for this, but a `.env.local` file is all that is necessary.
+### `.env.local` file is necessary.
 
 > **Note:** You should **not** commit your `.env.local` file or it will expose secrets that will allow others to control access to your various OpenAI and authentication provider accounts.
 
