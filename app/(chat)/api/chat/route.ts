@@ -8,6 +8,7 @@ import {
 import { z } from 'zod';
 
 import { customModel } from '@/ai';
+import { queryRelevantDocuments } from '@/ai/pinecone';
 import { models } from '@/ai/models';
 import { systemPrompt } from '@/ai/prompts';
 import { auth } from '@/app/(auth)/auth';
@@ -86,6 +87,7 @@ export async function POST(request: Request) {
       { ...userMessage, id: generateUUID(), createdAt: new Date(), chatId: id },
     ],
   });
+  
 
   const streamingData = new StreamData();
 

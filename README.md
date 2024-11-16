@@ -25,6 +25,8 @@ Create a `.env.local` file in the root of your project and add the following env
 - `AUTH_SECRET`: A secret key for authentication. Generate one at [Generate Secret](https://generate-secret.vercel.app/32).
 - `BLOB_READ_WRITE_TOKEN`: Token for Vercel Blob storage. Refer to [Vercel Blob Documentation](https://vercel.com/docs/storage/vercel-blob).
 - `POSTGRES_URL`: Your Vercel Postgres database URL. Follow the [Vercel Postgres Quickstart](https://vercel.com/docs/storage/vercel-postgres/quickstart) to set it up.
+- `PINECONE_API_KEY`: Get an api key in [Pinecone](https://app.pinecone.io/) index cluster.
+- `PINECONE_REGION`: Take the region of your index cluster on [Pinecone](https://app.pinecone.io/).
 
 ### Steps to Run
 
