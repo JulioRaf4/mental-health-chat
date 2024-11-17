@@ -8,7 +8,6 @@ import {
 import { z } from 'zod';
 
 import { customModel } from '@/ai';
-import { queryRelevantDocuments } from '@/ai/pinecone';
 import { models } from '@/ai/models';
 import { systemPrompt } from '@/ai/prompts';
 import { auth } from '@/app/(auth)/auth';
@@ -36,7 +35,6 @@ type AllowedTools =
   | 'createDocument'
   | 'updateDocument'
   | 'requestSuggestions'
-  | 'getWeather';
 
 const blocksTools: AllowedTools[] = [
   'createDocument',
@@ -44,9 +42,7 @@ const blocksTools: AllowedTools[] = [
   'requestSuggestions',
 ];
 
-const weatherTools: AllowedTools[] = ['getWeather'];
-
-const allTools: AllowedTools[] = [...blocksTools, ...weatherTools];
+const allTools: AllowedTools[] = [...blocksTools];
 
 export async function POST(request: Request) {
   const {
@@ -87,7 +83,6 @@ export async function POST(request: Request) {
       { ...userMessage, id: generateUUID(), createdAt: new Date(), chatId: id },
     ],
   });
-  
 
   const streamingData = new StreamData();
 
@@ -98,21 +93,6 @@ export async function POST(request: Request) {
     maxSteps: 5,
     experimental_activeTools: allTools,
     tools: {
-      getWeather: {
-        description: 'Get the current weather at a location',
-        parameters: z.object({
-          latitude: z.number(),
-          longitude: z.number(),
-        }),
-        execute: async ({ latitude, longitude }) => {
-          const response = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
-          );
-
-          const weatherData = await response.json();
-          return weatherData;
-        },
-      },
       createDocument: {
         description: 'Create a document for a writing activity',
         parameters: z.object({
