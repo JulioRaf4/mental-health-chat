@@ -26,6 +26,7 @@ import {
   getMostRecentUserMessage,
   sanitizeResponseMessages,
 } from '@/lib/utils';
+import { findRelevantContent } from '@/ai/embedding';
 
 import { generateTitleFromUserMessage } from '../../actions';
 
@@ -93,6 +94,13 @@ export async function POST(request: Request) {
     maxSteps: 5,
     experimental_activeTools: allTools,
     tools: {
+      getInformation: {
+        description: `get information from your knowledge base to answer questions.`,
+        parameters: z.object({
+          question: z.string().describe('the users question'),
+        }),
+        execute: async ({ question }: { question: string }) => findRelevantContent(question),
+      },
       createDocument: {
         description: 'Create a document for a writing activity',
         parameters: z.object({
@@ -257,7 +265,7 @@ export async function POST(request: Request) {
           const { elementStream } = await streamObject({
             model: customModel(model.apiIdentifier),
             system:
-              'You are a help writing assistant. Given a piece of writing, please offer suggestions to improve the piece of writing and describe the change. It is very important for the edits to contain full sentences instead of just words. Max 5 suggestions.',
+              'You are a help writing assistant for mental health purpose. Given a piece of writing like a conversation, please offer suggestions to improve the piece of writing and describe the change. It is very important for the edits to contain full sentences instead of just words. Give humane and delicate suggestions',
             prompt: document.content,
             output: 'array',
             schema: z.object({
