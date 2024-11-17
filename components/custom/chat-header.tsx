@@ -1,5 +1,6 @@
 'use client';
 
+import { Github } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useWindowSize } from 'usehooks-ts';
@@ -11,7 +12,6 @@ import { BetterTooltip } from '@/components/ui/tooltip';
 
 import { PlusIcon } from './icons';
 import { useSidebar } from '../ui/sidebar';
-import { Github } from 'lucide-react';
 
 export function ChatHeader({ selectedModelId }: { selectedModelId: string }) {
   const router = useRouter();
