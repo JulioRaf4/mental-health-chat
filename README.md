@@ -25,6 +25,8 @@ Create a `.env.local` file in the root of your project and add the following env
 - `AUTH_SECRET`: A secret key for authentication. Generate one at [Generate Secret](https://generate-secret.vercel.app/32).
 - `BLOB_READ_WRITE_TOKEN`: Token for Vercel Blob storage. Refer to [Vercel Blob Documentation](https://vercel.com/docs/storage/vercel-blob).
 - `POSTGRES_URL`: Your Vercel Postgres database URL. Follow the [Vercel Postgres Quickstart](https://vercel.com/docs/storage/vercel-postgres/quickstart) to set it up.
+- `PINECONE_API_KEY`: Get an api key in [Pinecone](https://app.pinecone.io/) index cluster.
+- `PINECONE_ENVIRONMENT`: Take the region of your index cluster on [Pinecone](https://app.pinecone.io/).
 
 ### Steps to Run
 
@@ -43,3 +45,18 @@ Create a `.env.local` file in the root of your project and add the following env
     pnpm run dev
 
  **Your app should now be running on localhost:3000.**
+
+### Using Hugging Face Datasets for Upsert
+
+This project includes functionality to upload datasets from Hugging Face to Pinecone for efficient vector search and retrieval. The `upload_huggingface_dataset_to_pinecone` function in `upsertdata.py` script handles this process. It loads a specified dataset, generates embeddings for the text data using OpenAI's embedding model, and upserts these embeddings into a Pinecone index.
+
+To use this feature, ensure you have the necessary environment variables set up in your `.env.local` file, particularly `OPENAI_API_KEY`, `PINECONE_API_KEY`, and `PINECONE_ENVIRONMENT`. You can then call the function with the desired dataset name and split (e.g., 'train') to upload the data to Pinecone.
+
+Example usage:
+
+```python
+dataset_name = 'JulioRaf4/exemple-dataset'
+upload_huggingface_dataset_to_pinecone(dataset_name)
+```
+
+This will process the dataset and make it available for retrieval-augmented generation tasks within your application.

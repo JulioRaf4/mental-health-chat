@@ -26,6 +26,7 @@ import {
   getMostRecentUserMessage,
   sanitizeResponseMessages,
 } from '@/lib/utils';
+import { findRelevantContent } from '@/ai/embedding';
 
 import { generateTitleFromUserMessage } from '../../actions';
 
@@ -35,7 +36,6 @@ type AllowedTools =
   | 'createDocument'
   | 'updateDocument'
   | 'requestSuggestions'
-  | 'getWeather';
 
 const blocksTools: AllowedTools[] = [
   'createDocument',
@@ -43,9 +43,7 @@ const blocksTools: AllowedTools[] = [
   'requestSuggestions',
 ];
 
-const weatherTools: AllowedTools[] = ['getWeather'];
-
-const allTools: AllowedTools[] = [...blocksTools, ...weatherTools];
+const allTools: AllowedTools[] = [...blocksTools];
 
 export async function POST(request: Request) {
   const {
@@ -96,20 +94,12 @@ export async function POST(request: Request) {
     maxSteps: 5,
     experimental_activeTools: allTools,
     tools: {
-      getWeather: {
-        description: 'Get the current weather at a location',
+      getInformation: {
+        description: `get information from your knowledge base to answer questions.`,
         parameters: z.object({
-          latitude: z.number(),
-          longitude: z.number(),
+          question: z.string().describe('the users question'),
         }),
-        execute: async ({ latitude, longitude }) => {
-          const response = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
-          );
-
-          const weatherData = await response.json();
-          return weatherData;
-        },
+        execute: async ({ question }: { question: string }) => findRelevantContent(question),
       },
       createDocument: {
         description: 'Create a document for a writing activity',
@@ -275,7 +265,7 @@ export async function POST(request: Request) {
           const { elementStream } = await streamObject({
             model: customModel(model.apiIdentifier),
             system:
-              'You are a help writing assistant. Given a piece of writing, please offer suggestions to improve the piece of writing and describe the change. It is very important for the edits to contain full sentences instead of just words. Max 5 suggestions.',
+              'You are a help writing assistant for mental health purpose. Given a piece of writing like a conversation, please offer suggestions to improve the piece of writing and describe the change. It is very important for the edits to contain full sentences instead of just words. Give humane and delicate suggestions',
             prompt: document.content,
             output: 'array',
             schema: z.object({
