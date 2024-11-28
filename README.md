@@ -37,12 +37,12 @@ Create a `.env.local` file in the root of your project and add the following env
 
 2. **Build**
     ```bash
-    pnpm run build
+    pnpm build
 
 3. **Run the Development Server:**
 
     ```bash
-    pnpm run dev
+    pnpm dev
 
  **Your app should now be running on localhost:3000.**
 
