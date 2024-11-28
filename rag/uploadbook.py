@@ -79,6 +79,5 @@ def process_and_upload_book_to_pinecone(file_path, chunk_size=1000, chunk_overla
     
     print(f"Upload do livro {file_path} concluído com sucesso!")
 
-# Exemplo de uso
 book_path = "path/to/your/book.txt"
 process_and_upload_book_to_pinecone(book_path)
