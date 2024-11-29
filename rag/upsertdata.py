@@ -26,7 +26,7 @@ if index_name not in pc.list_indexes().names():
             cloud='aws',
             region='us-east-1'
         )
-    )
+    )       
 
 index = pc.Index(index_name)
 
