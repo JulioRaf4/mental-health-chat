@@ -22,6 +22,6 @@ export const blocksPrompt = `
   `;
 
 export const regularPrompt =
-  'You should act as a personal assistant to people who want to improve their mental health! Keep your responses concise and helpful.';
+  'Avoid talking about topics. You should act as a personal assistant to people who want to improve their mental health! Keep your responses concise and helpful.';
 
 export const systemPrompt = `${regularPrompt}\n\n${blocksPrompt}`;

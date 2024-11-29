@@ -5,12 +5,21 @@ from pinecone import Pinecone, ServerlessSpec
 from dotenv import load_dotenv
 from datasets import load_dataset
 import uuid
+from charset_normalizer import from_path
 
-load_dotenv(dotenv_path='.env.local')
+def detect_encoding(file_path):
+    result = from_path(file_path).best()
+    return result.encoding if result else "utf-8"
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
-pinecone_api_key = os.getenv('PINECONE_API_KEY')
-pinecone_environment = os.getenv('PINECONE_ENVIRONMENT') 
+
+load_dotenv('.env.local')
+
+openai.api_key = 
+pinecone_api_key = 
+pinecone_environment = 'us-east1-gcp'
+
+if not openai.api_key or not pinecone_api_key:
+    raise ValueError("API keys para OpenAI ou Pinecone não estão configuradas corretamente no arquivo .env.")
 
 pc = Pinecone(api_key=pinecone_api_key)
 
@@ -51,8 +60,12 @@ def process_and_upload_book_to_pinecone(file_path, chunk_size=1000, chunk_overla
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"O arquivo {file_path} não foi encontrado.")
     
+    # Detecta o encoding do arquivo
+    encoding = detect_encoding(file_path)
+    print(f"Usando encoding: {encoding} para o arquivo: {file_path}")
+    
     # Lê o conteúdo do livro
-    with open(file_path, 'r', encoding='utf-8') as file:
+    with open(file_path, 'r', encoding=encoding) as file:
         book_text = file.read()
     
     # Divide o texto em chunks
@@ -78,6 +91,3 @@ def process_and_upload_book_to_pinecone(file_path, chunk_size=1000, chunk_overla
         index.upsert(vectors=vectors)
     
     print(f"Upload do livro {file_path} concluído com sucesso!")
-
-book_path = "path/to/your/book.txt"
-process_and_upload_book_to_pinecone(book_path)
