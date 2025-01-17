@@ -86,7 +86,8 @@ export async function POST(request: Request) {
   });
 
   const streamingData = new StreamData();
-
+  
+  // https://sdk.vercel.ai/docs/reference/ai-sdk-core/stream-text
   const result = await streamText({
     model: customModel(model.apiIdentifier),
     system: systemPrompt,

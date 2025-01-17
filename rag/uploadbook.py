@@ -14,8 +14,8 @@ def detect_encoding(file_path):
 
 load_dotenv('.env.local')
 
-openai.api_key = 
-pinecone_api_key = 
+openai.api_key = os.getenv('OPENAI_API_KEY')
+pinecone_api_key = os.getenv('PINECONE_API_KEY')
 pinecone_environment = 'us-east1-gcp'
 
 if not openai.api_key or not pinecone_api_key:

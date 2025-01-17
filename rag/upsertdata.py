@@ -55,5 +55,8 @@ def upload_huggingface_dataset_to_pinecone(dataset_name, split='train'):
 
     print(f"Upload concluído para o dataset: {dataset_name}, split: {split}")
 
+# Temos que tratar o dataset para que ele sej
+# um dado valido para o RAG
+
 dataset_name = 'Amod/mental_health_counseling_conversations'  
 upload_huggingface_dataset_to_pinecone(dataset_name)
