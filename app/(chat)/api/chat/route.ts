@@ -93,6 +93,8 @@ export async function POST(request: Request) {
     system: systemPrompt,
     messages: coreMessages,
     maxSteps: 5,
+    maxTokens: 2048,
+    temperature: 0.7,
     experimental_activeTools: allTools,
     tools: {
       getInformation: {
@@ -192,8 +194,15 @@ export async function POST(request: Request) {
 
           const { fullStream } = await streamText({
             model: customModel(model.apiIdentifier),
-            system:
-              'You are a helpful writing assistant. Based on the description, please update the piece of writing.',
+            system: `Você é um assistente de escrita altamente qualificado. Por favor, atualize o texto fornecido:
+            - Mantenha um tom consistente e natural
+            - Desenvolva as ideias de forma completa e coerente
+            - Use parágrafos bem estruturados
+            - Mantenha a fluência e conexão entre as ideias
+            - Evite respostas em tópicos, prefira texto corrido
+            - Forneça explicações detalhadas quando necessário`,
+            maxTokens: 2048,
+            temperature: 0.7,
             experimental_providerMetadata: {
               openai: {
                 prediction: {
