@@ -50,7 +50,7 @@
     "prosemirror-schema-list": "^1.5.1",
     "prosemirror-state": "^1.4.3",
     "prosemirror-view": "^1.38.1",
-    "react": "19.0.0-rc-45804af1-20241021",
+    "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-markdown": "^9.1.0",
     "remark-gfm": "^4.0.1",
