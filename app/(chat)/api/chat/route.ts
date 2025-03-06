@@ -326,11 +326,11 @@ export async function POST(request: Request) {
         },
       },
     },
-    onFinish: async ({ responseMessages }) => {
+    onFinish: async ({ response }) => {
       if (session.user && session.user.id) {
         try {
           const responseMessagesWithoutIncompleteToolCalls =
-            sanitizeResponseMessages(responseMessages);
+            sanitizeResponseMessages(response.messages);
 
           await saveMessages({
             messages: responseMessagesWithoutIncompleteToolCalls.map(
