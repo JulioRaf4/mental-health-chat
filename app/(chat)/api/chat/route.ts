@@ -90,10 +90,15 @@ export async function POST(request: Request) {
   // https://sdk.vercel.ai/docs/reference/ai-sdk-core/stream-text
   const result = await streamText({
     model: customModel(model.apiIdentifier),
-    system: systemPrompt,
+    system: systemPrompt + `
+    Adapte o tamanho da sua resposta de acordo com a complexidade da pergunta:
+    - Para perguntas simples ou diretas, forneça respostas concisas (2-3 parágrafos no máximo)
+    - Para perguntas complexas que exigem explicações detalhadas, você pode elaborar mais
+    - Priorize informações práticas e aplicáveis
+    - Evite repetições e informações desnecessárias`,
     messages: coreMessages,
     maxSteps: 5,
-    maxTokens: 2048,
+    maxTokens: 1024,
     temperature: 0.7,
     experimental_activeTools: allTools,
     tools: {
@@ -200,8 +205,9 @@ export async function POST(request: Request) {
             - Use parágrafos bem estruturados
             - Mantenha a fluência e conexão entre as ideias
             - Evite respostas em tópicos, prefira texto corrido
-            - Forneça explicações detalhadas quando necessário`,
-            maxTokens: 2048,
+            - Forneça explicações detalhadas quando necessário
+            - Adapte o tamanho da resposta à complexidade da pergunta`,
+            maxTokens: 1024,
             temperature: 0.7,
             experimental_providerMetadata: {
               openai: {

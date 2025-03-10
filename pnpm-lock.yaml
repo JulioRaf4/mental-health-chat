@@ -78,7 +78,7 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       drizzle-orm:
-        specifier: ^0.39.3
+        specifier: 0.39.3
         version: 0.39.3(@opentelemetry/api@1.9.0)(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(postgres@3.4.5)
       framer-motion:
         specifier: ^11.18.2
