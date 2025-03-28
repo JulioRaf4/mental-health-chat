@@ -1,3 +1,5 @@
+> # this repository is intended for academic research
+
 # Mental Health Chatbot
 
 A tool designed to assist psychologists and patients in the field of mental health. Built with Next.js and Vercel's AI SDK, this chatbot template leverages the `streamText` function on the server and the `useChat` hook on the client to enable a seamless and supportive interaction experience for therapy and mental well-being applications.It uses RAG (Retrieval-Augmented Generation) to retrieve studies, documents, articles and conversations within the context of psychology.
