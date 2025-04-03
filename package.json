@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "1.0.0-canary.3",
+    "@ai-sdk/openai": "1.2.3",
     "@pinecone-database/pinecone": "^4.1.0",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-dialog": "^1.1.6",
