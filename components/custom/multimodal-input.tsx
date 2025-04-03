@@ -116,73 +116,17 @@ export function MultimodalInput({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
 
-  const submitForm = useCallback(async () => {
-    window.history.replaceState({}, '', `/chat/${chatId}`);
-
-    if (isAgentMode) {
-      // Executar em modo agente
-      try {
-        const userMessage = {
-          role: 'user',
-          content: input,
-        };
-        
-        // Adicionar a mensagem do usuário à UI
-        append(userMessage as Message);
-        
-        // Chamar a API do agente
-        const response = await fetch('/api/agent', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: chatId,
-            message: input,
-            modelId: localStorage.getItem('model-id') || 'gpt-3.5-turbo',
-          }),
-        });
-        
-        if (!response.ok) {
-          throw new Error('Failed to get response from agent');
-        }
-        
-        // O restante será tratado pelo streaming
-        setInput('');
-        setLocalStorageInput('');
-        
-      } catch (error) {
-        console.error('Error using agent:', error);
-        toast.error('Failed to process with agent. Falling back to normal mode.');
-        // Fallback para o modo normal
-        handleSubmit(undefined, {
-          experimental_attachments: attachments,
-        });
+  const submitForm = useCallback(
+    () => {
+      if (input.trim() === '' && attachments.length === 0) {
+        return;
       }
-    } else {
-      // Modo normal
-      handleSubmit(undefined, {
-        experimental_attachments: attachments,
-      });
-    }
 
-    setAttachments([]);
-    setLocalStorageInput('');
-
-    if (width && width > 768) {
-      textareaRef.current?.focus();
-    }
-  }, [
-    attachments,
-    handleSubmit,
-    setAttachments,
-    setLocalStorageInput,
-    width,
-    chatId,
-    isAgentMode,
-    input,
-    append
-  ]);
+      setLocalStorageInput('');
+      handleSubmit();
+    },
+    [input, attachments, handleSubmit, setLocalStorageInput]
+  );
 
   const uploadFile = async (file: File) => {
     const formData = new FormData();

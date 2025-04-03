@@ -27,7 +27,7 @@ export function ProductShowcase() {
         <div className="space-y-4 mt-6">
           <div className="flex items-start gap-3">
             <div className="bg-zinc-200 rounded-full p-2 dark:bg-zinc-800">
-              <ChatBubbleIcon className="h-5 w-5 text-zinc-800 dark:text-zinc-200" />
+              <ChatBubbleIcon className="size-5 text-zinc-800 dark:text-zinc-200" />
             </div>
             <div>
               <h3 className="font-medium">Therapeutic conversations</h3>
@@ -40,7 +40,7 @@ export function ProductShowcase() {
 
           <div className="flex items-start gap-3">
             <div className="bg-zinc-200 rounded-full p-2 dark:bg-zinc-800">
-              <HeartFilledIcon className="h-5 w-5 text-zinc-800 dark:text-zinc-200" />
+              <HeartFilledIcon className="size-5 text-zinc-800 dark:text-zinc-200" />
             </div>
             <div>
               <h3 className="font-medium">Emotional support</h3>
@@ -53,7 +53,7 @@ export function ProductShowcase() {
 
           <div className="flex items-start gap-3">
             <div className="bg-zinc-200 rounded-full p-2 dark:bg-zinc-800">
-              <PersonIcon className="h-5 w-5 text-zinc-800 dark:text-zinc-200" />
+              <PersonIcon className="size-5 text-zinc-800 dark:text-zinc-200" />
             </div>
             <div>
               <h3 className="font-medium">Personal development</h3>
@@ -64,7 +64,7 @@ export function ProductShowcase() {
           </div>
           <div className="flex items-start gap-3">
             <div className="bg-zinc-200 rounded-full p-2 dark:bg-zinc-800">
-              <GitHubLogoIcon className="h-5 w-5 text-zinc-800 dark:text-zinc-200" />
+              <GitHubLogoIcon className="size-5 text-zinc-800 dark:text-zinc-200" />
             </div>
             <div>
               <h3 className="font-medium">Open Source</h3>
