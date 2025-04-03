@@ -27,8 +27,8 @@ export const Overview = () => {
         >
           open source
         </Link>{' '}
-        and free tool designed to assist psychologists and patients in the field of mental health. Built with Next.js and Vercel&apos;s AI SDK.{' '}
-        and has been trained with psychology-focused content to provide tailored support for therapy and mental well-being applications.
+        and free tool designed to assist psychologists and patients in the field of mental health.{' '}
+        It has been trained with psychology-focused content to provide tailored support for therapy and mental well-being applications.
       </p>
       </div>
     </motion.div>

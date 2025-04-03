@@ -17,7 +17,7 @@ import { useLocalStorage, useWindowSize } from 'usehooks-ts';
 
 import { sanitizeUIMessages } from '@/lib/utils';
 
-import { ArrowUpIcon, PaperclipIcon, StopIcon } from './icons';
+import { ArrowUpIcon, BotIcon, PaperclipIcon, SparklesIcon, StopIcon } from './icons';
 import { PreviewAttachment } from './preview-attachment';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
@@ -72,6 +72,7 @@ export function MultimodalInput({
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
+  const [isAgentMode, setIsAgentMode] = useState(false);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -115,12 +116,55 @@ export function MultimodalInput({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
 
-  const submitForm = useCallback(() => {
+  const submitForm = useCallback(async () => {
     window.history.replaceState({}, '', `/chat/${chatId}`);
 
-    handleSubmit(undefined, {
-      experimental_attachments: attachments,
-    });
+    if (isAgentMode) {
+      // Executar em modo agente
+      try {
+        const userMessage = {
+          role: 'user',
+          content: input,
+        };
+        
+        // Adicionar a mensagem do usuário à UI
+        append(userMessage as Message);
+        
+        // Chamar a API do agente
+        const response = await fetch('/api/agent', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: chatId,
+            message: input,
+            modelId: localStorage.getItem('model-id') || 'gpt-3.5-turbo',
+          }),
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to get response from agent');
+        }
+        
+        // O restante será tratado pelo streaming
+        setInput('');
+        setLocalStorageInput('');
+        
+      } catch (error) {
+        console.error('Error using agent:', error);
+        toast.error('Failed to process with agent. Falling back to normal mode.');
+        // Fallback para o modo normal
+        handleSubmit(undefined, {
+          experimental_attachments: attachments,
+        });
+      }
+    } else {
+      // Modo normal
+      handleSubmit(undefined, {
+        experimental_attachments: attachments,
+      });
+    }
 
     setAttachments([]);
     setLocalStorageInput('');
@@ -135,6 +179,9 @@ export function MultimodalInput({
     setLocalStorageInput,
     width,
     chatId,
+    isAgentMode,
+    input,
+    append
   ]);
 
   const uploadFile = async (file: File) => {
@@ -190,6 +237,16 @@ export function MultimodalInput({
     },
     [setAttachments]
   );
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('isAgentMode') === 'true';
+    setIsAgentMode(savedMode);
+  }, []);
+
+  const toggleAgentMode = (value: boolean) => {
+    setIsAgentMode(value);
+    localStorage.setItem('isAgentMode', value.toString());
+  };
 
   return (
     <div className="relative w-full flex flex-col gap-4">
@@ -257,29 +314,62 @@ export function MultimodalInput({
         </div>
       )}
 
-      <Textarea
-        ref={textareaRef}
-        placeholder="Send a message..."
-        value={input}
-        onChange={handleInput}
-        className={cx(
-          'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-muted',
-          className
-        )}
-        rows={3}
-        autoFocus
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
+      <div className="flex flex-col gap-2">
+        <div className="flex justify-end gap-2 px-1">
+          <Button 
+            variant={isAgentMode ? "outline" : "default"}
+            size="sm"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleAgentMode(false);
+            }}
+            className="flex items-center gap-1"
+            disabled={isLoading}
+          >
+            <SparklesIcon size={16} />
+            <span className="hidden md:inline">Normal</span>
+          </Button>
+          <Button 
+            variant={isAgentMode ? "default" : "outline"}
+            size="sm"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleAgentMode(true);
+            }}
+            className="flex items-center gap-1"
+            disabled={isLoading}
+          >
+            <BotIcon />
+            <span className="hidden md:inline">Agent</span>
+          </Button>
+        </div>
 
-            if (isLoading) {
-              toast.error('Please wait for the model to finish its response!');
-            } else {
-              submitForm();
+        <Textarea
+          ref={textareaRef}
+          placeholder={isAgentMode ? "Ask the agent to do something..." : "Send a message..."}
+          value={input}
+          onChange={handleInput}
+          className={cx(
+            'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-muted',
+            className
+          )}
+          rows={3}
+          autoFocus
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+              event.preventDefault();
+
+              if (isLoading) {
+                toast.error('Please wait for the model to finish its response!');
+              } else {
+                submitForm();
+              }
             }
-          }
-        }}
-      />
+          }}
+        />
+      </div>
 
       {isLoading ? (
         <Button
