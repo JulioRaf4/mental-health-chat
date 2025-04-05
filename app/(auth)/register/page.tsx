@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { AuthForm } from '@/components/custom/auth-form';
@@ -18,7 +17,7 @@ export default function Page() {
   const [email, setEmail] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
 
-  const [state, formAction] = useFormState<RegisterActionState, FormData>(
+  const [state, formAction] = useActionState<RegisterActionState, FormData>(
     register,
     {
       status: 'idle',

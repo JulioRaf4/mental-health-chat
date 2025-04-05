@@ -12,7 +12,7 @@ export function ProductShowcase() {
     <div className="hidden lg:flex flex-col h-full w-[35em] max-w-2xl bg-zinc-50 dark:bg-zinc-900 p-12 justify-center text-foreground border-r border-zinc-200 dark:border-zinc-800 rounded-r-2xl">
       <div className="space-y-8 max-w-xl">
         <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-bold">Mental Health Chat</h1>
+          <h1 className="text-2xl font-bold">🧠 Mental Health Chat</h1>
         </div>
 
         <h2 className="text-4xl font-bold leading-tight">

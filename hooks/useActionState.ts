@@ -1,7 +1,7 @@
 'use client';
 
-import { useFormState } from 'react-dom';
+import { useActionState as useReactActionState } from 'react';
 
 export function useActionState(action: any, initialState: any) {
-  return useFormState(action, initialState);
+  return useReactActionState(action, initialState);
 }
