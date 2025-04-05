@@ -17,7 +17,7 @@ import { useLocalStorage, useWindowSize } from 'usehooks-ts';
 
 import { sanitizeUIMessages } from '@/lib/utils';
 
-import { ArrowUpIcon, PaperclipIcon, StopIcon } from './icons';
+import { ArrowUpIcon, BotIcon, PaperclipIcon, SparklesIcon, StopIcon } from './icons';
 import { PreviewAttachment } from './preview-attachment';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
@@ -72,6 +72,7 @@ export function MultimodalInput({
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
+  const [isAgentMode, setIsAgentMode] = useState(false);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -115,27 +116,17 @@ export function MultimodalInput({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
 
-  const submitForm = useCallback(() => {
-    window.history.replaceState({}, '', `/chat/${chatId}`);
+  const submitForm = useCallback(
+    () => {
+      if (input.trim() === '' && attachments.length === 0) {
+        return;
+      }
 
-    handleSubmit(undefined, {
-      experimental_attachments: attachments,
-    });
-
-    setAttachments([]);
-    setLocalStorageInput('');
-
-    if (width && width > 768) {
-      textareaRef.current?.focus();
-    }
-  }, [
-    attachments,
-    handleSubmit,
-    setAttachments,
-    setLocalStorageInput,
-    width,
-    chatId,
-  ]);
+      setLocalStorageInput('');
+      handleSubmit();
+    },
+    [input, attachments, handleSubmit, setLocalStorageInput]
+  );
 
   const uploadFile = async (file: File) => {
     const formData = new FormData();
@@ -190,6 +181,16 @@ export function MultimodalInput({
     },
     [setAttachments]
   );
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('isAgentMode') === 'true';
+    setIsAgentMode(savedMode);
+  }, []);
+
+  const toggleAgentMode = (value: boolean) => {
+    setIsAgentMode(value);
+    localStorage.setItem('isAgentMode', value.toString());
+  };
 
   return (
     <div className="relative w-full flex flex-col gap-4">
@@ -257,29 +258,63 @@ export function MultimodalInput({
         </div>
       )}
 
-      <Textarea
-        ref={textareaRef}
-        placeholder="Send a message..."
-        value={input}
-        onChange={handleInput}
-        className={cx(
-          'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-muted',
-          className
-        )}
-        rows={3}
-        autoFocus
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
+      <div className="flex flex-col gap-2">
+        <div className="relative">
+          <Textarea
+            ref={textareaRef}
+            placeholder={isAgentMode ? "Ask the agent to do something..." : "Send a message..."}
+            value={input}
+            onChange={handleInput}
+            className={cx(
+              'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-muted pt-2  ',
+              className
+            )}
+            rows={5}
+            autoFocus
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
 
-            if (isLoading) {
-              toast.error('Please wait for the model to finish its response!');
-            } else {
-              submitForm();
-            }
-          }
-        }}
-      />
+                if (isLoading) {
+                  toast.error('Please wait for the model to finish its response!');
+                } else {
+                  submitForm();
+                }
+              }
+            }}
+          />
+          <div className="absolute bottom-2 left-2 flex gap-2 z-10">
+            <Button 
+              variant={isAgentMode ? "outline" : "default"}
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleAgentMode(false);
+              }}
+              className="flex items-center gap-1 h-7 px-2 py-0"
+              disabled={isLoading}
+            >
+              <SparklesIcon size={14} />
+              <span className="text-xs">Normal</span>
+            </Button>
+            <Button 
+              variant={isAgentMode ? "default" : "outline"}
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleAgentMode(true);
+              }}
+              className="flex items-center gap-1 h-7 px-2 py-0"
+              disabled={isLoading}
+            >
+              <BotIcon />
+              <span className="text-xs">Agent</span>
+            </Button>
+          </div>
+        </div>
+      </div>
 
       {isLoading ? (
         <Button
