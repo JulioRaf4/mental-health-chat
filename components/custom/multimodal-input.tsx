@@ -259,60 +259,61 @@ export function MultimodalInput({
       )}
 
       <div className="flex flex-col gap-2">
-        <div className="flex justify-end gap-2 px-1">
-          <Button 
-            variant={isAgentMode ? "outline" : "default"}
-            size="sm"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleAgentMode(false);
-            }}
-            className="flex items-center gap-1"
-            disabled={isLoading}
-          >
-            <SparklesIcon size={16} />
-            <span className="hidden md:inline">Normal</span>
-          </Button>
-          <Button 
-            variant={isAgentMode ? "default" : "outline"}
-            size="sm"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleAgentMode(true);
-            }}
-            className="flex items-center gap-1"
-            disabled={isLoading}
-          >
-            <BotIcon />
-            <span className="hidden md:inline">Agent</span>
-          </Button>
-        </div>
+        <div className="relative">
+          <Textarea
+            ref={textareaRef}
+            placeholder={isAgentMode ? "Ask the agent to do something..." : "Send a message..."}
+            value={input}
+            onChange={handleInput}
+            className={cx(
+              'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-muted pt-2  ',
+              className
+            )}
+            rows={5}
+            autoFocus
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
 
-        <Textarea
-          ref={textareaRef}
-          placeholder={isAgentMode ? "Ask the agent to do something..." : "Send a message..."}
-          value={input}
-          onChange={handleInput}
-          className={cx(
-            'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-muted',
-            className
-          )}
-          rows={3}
-          autoFocus
-          onKeyDown={(event) => {
-            if (event.key === 'Enter' && !event.shiftKey) {
-              event.preventDefault();
-
-              if (isLoading) {
-                toast.error('Please wait for the model to finish its response!');
-              } else {
-                submitForm();
+                if (isLoading) {
+                  toast.error('Please wait for the model to finish its response!');
+                } else {
+                  submitForm();
+                }
               }
-            }
-          }}
-        />
+            }}
+          />
+          <div className="absolute bottom-2 left-2 flex gap-2 z-10">
+            <Button 
+              variant={isAgentMode ? "outline" : "default"}
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleAgentMode(false);
+              }}
+              className="flex items-center gap-1 h-7 px-2 py-0"
+              disabled={isLoading}
+            >
+              <SparklesIcon size={14} />
+              <span className="text-xs">Normal</span>
+            </Button>
+            <Button 
+              variant={isAgentMode ? "default" : "outline"}
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleAgentMode(true);
+              }}
+              className="flex items-center gap-1 h-7 px-2 py-0"
+              disabled={isLoading}
+            >
+              <BotIcon />
+              <span className="text-xs">Agent</span>
+            </Button>
+          </div>
+        </div>
       </div>
 
       {isLoading ? (
