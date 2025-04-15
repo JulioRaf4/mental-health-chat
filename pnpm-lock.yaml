@@ -57,8 +57,8 @@ importers:
         specifier: ^0.10.0
         version: 0.10.0
       ai:
-        specifier: 4.1.58
-        version: 4.1.58(react@19.0.0)(zod@3.24.2)
+        specifier: 4.1.63
+        version: 4.1.63(react@19.0.0)(zod@3.24.2)
       bcrypt-ts:
         specifier: ^5.0.3
         version: 5.0.3
@@ -81,8 +81,8 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       drizzle-orm:
-        specifier: 0.40.0
-        version: 0.40.0(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(postgres@3.4.5)
+        specifier: 0.40.1
+        version: 0.40.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(postgres@3.4.5)
       framer-motion:
         specifier: ^11.18.2
         version: 11.18.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -90,8 +90,8 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(next@15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       lucide-react:
-        specifier: ^0.479.0
-        version: 0.479.0(react@19.0.0)
+        specifier: ^0.483.0
+        version: 0.483.0(react@19.0.0)
       next:
         specifier: 15.2.4
         version: 15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -102,7 +102,7 @@ importers:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       openai:
-        specifier: ^4.91.1
+        specifier: ^4.88.0
         version: 4.91.1(encoding@0.1.13)(ws@8.18.1(bufferutil@4.0.9))(zod@3.24.2)
       orderedmap:
         specifier: ^2.1.1
@@ -240,8 +240,8 @@ packages:
       zod:
         optional: true
 
-  '@ai-sdk/provider-utils@2.1.12':
-    resolution: {integrity: sha512-NLm2Ypkv419jR5TNOvZ057ciSYFKzSDEIIwE8cRyeR1Y5RbuX+auZveqGg6GWsDzvUnn6Xra7BJmr0422v60UA==}
+  '@ai-sdk/provider-utils@2.1.14':
+    resolution: {integrity: sha512-0fNQwstwqHP+cE9bP9nQXeEhY/qJRGW5Y+AQrvwzd0EI2+gH1GmwI1IC/gIOksmz/gRy4G+kXXD+Fbq4T/jCbA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
@@ -253,12 +253,12 @@ packages:
     resolution: {integrity: sha512-NyYVTM8veeOLUNcY+2bGQ359AEWm/P3FgNVweGR8dNfihFXYxsBQhB58RhcVnKgWzlUgNFGi9tajgbSKkImTTg==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/provider@1.0.10':
-    resolution: {integrity: sha512-pco8Zl9U0xwXI+nCLc0woMtxbvjU8hRmGTseAUiPHFLYAAL8trRPCukg69IDeinOvIeo1SmXxAIdWWPZOLb4Cg==}
+  '@ai-sdk/provider@1.0.12':
+    resolution: {integrity: sha512-88Uu1zJIE1UUOVJWfE2ybJXgiH8JJ97QY9fbmplErEbfa/k/1kF+tWMVAAJolF2aOGmazQGyQLhv4I9CCuVACw==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/react@1.1.22':
-    resolution: {integrity: sha512-+ZlmJBu9NH59wvAtuh+xXEJ2MEfisBpVbYwN347+VlJJ3LfHVH9Rp1d58jVwBsfJvDUMn5UMuHZIXIdQhJIBTg==}
+  '@ai-sdk/react@1.1.24':
+    resolution: {integrity: sha512-20rVK34QCaEl/4u87/Y+JXt7eCzF60UwoJOjHJhlCdmFrbk6AfRsijv0ludA9ELArE+ulxkSf21L3FokkZ2Gmg==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18 || ^19 || ^19.0.0-rc
@@ -269,8 +269,8 @@ packages:
       zod:
         optional: true
 
-  '@ai-sdk/ui-utils@1.1.18':
-    resolution: {integrity: sha512-PCDXKKKHqA8Oqm5LsXl3Byxmit0r0Gg3nMPI3bdEriDIExoQikULX2T6/IS5u1qNeoC3UK5F2acpCyl5Q+aIuQ==}
+  '@ai-sdk/ui-utils@1.1.20':
+    resolution: {integrity: sha512-k+qQh1YA8/kH12d8KQFWjr0UxyS9nLibzbLr2OY6fzpfZg8xIAKlZeH952JIp2XwAp72tesgbsAmA15cDldtyw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
@@ -1681,8 +1681,8 @@ packages:
     resolution: {integrity: sha512-kja8j7PjmncONqaTsB8fQ+wE2mSU2DJ9D4XKoJ5PFWIdRMa6SLSN1ff4mOr4jCbfRSsxR4keIiySJU0N9T5hIQ==}
     engines: {node: '>= 8.0.0'}
 
-  ai@4.1.58:
-    resolution: {integrity: sha512-ugOL7Py5GwlVVhqOW2UAK2ouUgzMepK8xkJtW4EXvK2CllYvNdK/2SG2sppdo7YJYSPqtlwbvi8BsDYNDwFlgg==}
+  ai@4.1.63:
+    resolution: {integrity: sha512-XXAU/jbtNZOHkTh9ZO4+ttXFXRjcs/62jJHbpO2M8UiH2FVIDia4fy4D5l8jGKlYVzKeE7rx/qB2GtrMjcc07w==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18 || ^19 || ^19.0.0-rc
@@ -2023,8 +2023,8 @@ packages:
     resolution: {integrity: sha512-Rcf0nYCAKizwjWQCY+d3zytyuTbDb81NcaPor+8NebESlUz1+9W3uGl0+r9FhU4Qal5Zv9j/7neXCSCe7DHzjA==}
     hasBin: true
 
-  drizzle-orm@0.40.0:
-    resolution: {integrity: sha512-7ptk/HQiMSrEZHnAsSlBESXWj52VwgMmyTEfoNmpNN2ZXpcz13LwHfXTIghsAEud7Z5UJhDOp8U07ujcqme7wg==}
+  drizzle-orm@0.40.1:
+    resolution: {integrity: sha512-aPNhtiJiPfm3qxz1czrnIDkfvkSdKGXYeZkpG55NPTVI186LmK2fBLMi4dsHpPHlJrZeQ92D322YFPHADBALew==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=4'
@@ -2777,8 +2777,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lucide-react@0.479.0:
-    resolution: {integrity: sha512-aBhNnveRhorBOK7uA4gDjgaf+YlHMdMhQ/3cupk6exM10hWlEU+2QtWYOfhXhjAsmdb6LeKR+NZnow4UxRRiTQ==}
+  lucide-react@0.483.0:
+    resolution: {integrity: sha512-WldsY17Qb/T3VZdMnVQ9C3DDIP7h1ViDTHVdVGnLZcvHNg30zH/MTQ04RTORjexoGmpsXroiQXZ4QyR0kBy0FA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -3898,9 +3898,9 @@ snapshots:
     optionalDependencies:
       zod: 3.24.2
 
-  '@ai-sdk/provider-utils@2.1.12(zod@3.24.2)':
+  '@ai-sdk/provider-utils@2.1.14(zod@3.24.2)':
     dependencies:
-      '@ai-sdk/provider': 1.0.10
+      '@ai-sdk/provider': 1.0.12
       eventsource-parser: 3.0.1
       nanoid: 3.3.11
       secure-json-parse: 2.7.0
@@ -3911,24 +3911,24 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/provider@1.0.10':
+  '@ai-sdk/provider@1.0.12':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.1.22(react@19.0.0)(zod@3.24.2)':
+  '@ai-sdk/react@1.1.24(react@19.0.0)(zod@3.24.2)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.1.12(zod@3.24.2)
-      '@ai-sdk/ui-utils': 1.1.18(zod@3.24.2)
+      '@ai-sdk/provider-utils': 2.1.14(zod@3.24.2)
+      '@ai-sdk/ui-utils': 1.1.20(zod@3.24.2)
       swr: 2.3.3(react@19.0.0)
       throttleit: 2.1.0
     optionalDependencies:
       react: 19.0.0
       zod: 3.24.2
 
-  '@ai-sdk/ui-utils@1.1.18(zod@3.24.2)':
+  '@ai-sdk/ui-utils@1.1.20(zod@3.24.2)':
     dependencies:
-      '@ai-sdk/provider': 1.0.10
-      '@ai-sdk/provider-utils': 2.1.12(zod@3.24.2)
+      '@ai-sdk/provider': 1.0.12
+      '@ai-sdk/provider-utils': 2.1.14(zod@3.24.2)
       zod-to-json-schema: 3.24.5(zod@3.24.2)
     optionalDependencies:
       zod: 3.24.2
@@ -5058,12 +5058,12 @@ snapshots:
     dependencies:
       humanize-ms: 1.2.1
 
-  ai@4.1.58(react@19.0.0)(zod@3.24.2):
+  ai@4.1.63(react@19.0.0)(zod@3.24.2):
     dependencies:
-      '@ai-sdk/provider': 1.0.10
-      '@ai-sdk/provider-utils': 2.1.12(zod@3.24.2)
-      '@ai-sdk/react': 1.1.22(react@19.0.0)(zod@3.24.2)
-      '@ai-sdk/ui-utils': 1.1.18(zod@3.24.2)
+      '@ai-sdk/provider': 1.0.12
+      '@ai-sdk/provider-utils': 2.1.14(zod@3.24.2)
+      '@ai-sdk/react': 1.1.24(react@19.0.0)(zod@3.24.2)
+      '@ai-sdk/ui-utils': 1.1.20(zod@3.24.2)
       '@opentelemetry/api': 1.9.0
       eventsource-parser: 3.0.1
       jsondiffpatch: 0.6.0
@@ -5405,7 +5405,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.40.0(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(postgres@3.4.5):
+  drizzle-orm@0.40.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(postgres@3.4.5):
     optionalDependencies:
       '@neondatabase/serverless': 1.0.0
       '@opentelemetry/api': 1.9.0
@@ -6301,7 +6301,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lucide-react@0.479.0(react@19.0.0):
+  lucide-react@0.483.0(react@19.0.0):
     dependencies:
       react: 19.0.0
 
