@@ -52,7 +52,7 @@
     "prosemirror-state": "^1.4.3",
     "prosemirror-view": "^1.38.1",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react-dom": "19.1.0",
     "react-markdown": "^9.1.0",
     "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",
